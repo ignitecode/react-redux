@@ -12,7 +12,7 @@ class Navbar extends Component {
             <Menu.Item name="home" active>
               Home
             </Menu.Item>
-            <Menu.Item name="favorites">
+            <Menu.Item name="favorites" onClick={() => this.props.onFavoriteClick()}>
               Favorites
             </Menu.Item>
             <Menu.Item name="search">
