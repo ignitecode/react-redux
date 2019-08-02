@@ -1,9 +1,20 @@
 import React, { Component } from 'react';
+import uuidv4 from 'uuid/v4';
+import { connect } from 'react-redux';
+import { addItem } from './actions/index';
 import { Container, Form, Button, Grid } from 'semantic-ui-react';
 import Favorites from './components/Favorites/Favorites';
 import All from './components/All/All';
 import Navbar from './components/Navbar/Navbar';
 import './App.css';
+
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addItem: (payload) => dispatch(addItem(payload))
+  }
+}
+
 
 class App extends Component {
   constructor(props) {
@@ -39,12 +50,12 @@ class App extends Component {
               <Form.Field>
                 <label>You're To Do</label>
                 <input
-                  value={this.state.value} 
+                  value={this.state.value}
                   placeholder='Enter To do'
                   onChange={e => this.setState({ value: e.target.value })}
                  />
               </Form.Field>
-              <Button type='submit' primary onClick={() => {}}>Submit</Button>
+              <Button type='submit' primary onClick={() => this.props.addItem({ value: this.state.value, favorite: false, id: uuidv4()  })}>Submit</Button>
             </Form>
             </Grid.Column>
           </Grid.Row>
@@ -54,4 +65,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default connect(null, mapDispatchToProps)(App);
