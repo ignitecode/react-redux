@@ -18,6 +18,8 @@ class App extends Component {
     return (
       <div>
         <Navbar
+          homeActive={this.state.showFavorites === false}
+          onHomeClick={() => this.setState({ showFavorites: false })}
           onFavoriteClick={() => this.setState({ showFavorites: true })}
          />
         {
