@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Container, Form, Button, Grid } from 'semantic-ui-react';
 import Favorites from './components/Favorites/Favorites';
 import All from './components/All/All';
 import Navbar from './components/Navbar/Navbar';
@@ -10,9 +11,9 @@ class App extends Component {
 
     this.state = {
       showFavorites: false,
+      value: '',
     }
   }
-
 
   render() {
     return (
@@ -24,9 +25,30 @@ class App extends Component {
          />
         {
           this.state.showFavorites ?
+          <Container>
             <Favorites />
-           : <All />
+          </Container> :
+          <Container>
+            <All />
+          </Container>
         }
+        <Grid columns={4} style={{ paddingLeft: 20 }}>
+          <Grid.Row>
+            <Grid.Column>
+            <Form>
+              <Form.Field>
+                <label>You're To Do</label>
+                <input
+                  value={this.state.value} 
+                  placeholder='Enter To do'
+                  onChange={e => this.setState({ value: e.target.value })}
+                 />
+              </Form.Field>
+              <Button type='submit' primary onClick={() => {}}>Submit</Button>
+            </Form>
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
       </div>
     );
   }
