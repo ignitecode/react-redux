@@ -1,3 +1,6 @@
 
 export const ADD_ITEM = "ADD_ITEM";
 export const REMOVE_ITEM = "REMOVE_ITEM";
+export const ADD_FAVORITE = "ADD_FAVORITE";
+export const REMOVE_FAVORITE = "REMOVE_FAVORITE";
+export const UPDATE_FAVORITE_ICON = "UPDATE_FAVORITE_ICON";

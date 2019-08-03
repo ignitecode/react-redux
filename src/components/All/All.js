@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { removeItem } from '../../actions/index';
+import { removeItem, addFavorite, updateFavoriteIcon } from '../../actions/index';
 import { connect } from 'react-redux';
 import { List, Button, Icon, Image } from 'semantic-ui-react';
 import './All.css';
@@ -12,11 +12,21 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    removeItem: (payload) => dispatch(removeItem(payload))
+    removeItem: (payload) => dispatch(removeItem(payload)),
+    addFavorite: (payload) => dispatch(addFavorite(payload)),
+    updateFavoriteIcon: (payload) => dispatch(updateFavoriteIcon(payload))
   }
 }
 
 class All extends Component {
+
+
+  handleFavorite(item) {
+    // Adds the item to the favorites list
+    this.props.addFavorite(item); // -> favoriteReducer
+    this.props.updateFavoriteIcon({ ...item, favorite: true }); // -> listReducer
+  }
+
   render() {
       return (
         <List verticalAlign='middle'>
@@ -29,8 +39,8 @@ class All extends Component {
                   <Button negative onClick={() => this.props.removeItem(item.id)}>Remove</Button>
                 </List.Content>
                 <List.Content floated='left'>
-                  <Button basic icon onClick={() => {}}>
-                    <Icon color={item.favorite ? 'yellow': 'grey'} name="star outline" />
+                  <Button basic icon onClick={() => this.handleFavorite(item)}>
+                    <Icon color={item.favorite ? 'yellow': 'grey'} name={item.favorite ? 'star' : 'star outline' } />
                   </Button>
                 </List.Content>
                 <List.Content>

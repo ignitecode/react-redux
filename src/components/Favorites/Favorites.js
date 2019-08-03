@@ -16,7 +16,7 @@ class Favorites extends Component {
         {
           this.props.favorites.map(favorite => {
             return (
-              <List.Item>
+              <List.Item key={favorite.id}>
                 <List.Content floated='right'>
                   <Button negative onClick={() => {}}>Remove</Button>
                 </List.Content>
@@ -24,7 +24,7 @@ class Favorites extends Component {
                     <Icon name="star" color='yellow' />
                 </List.Content>
                 <List.Content>
-                  // Content Goes here
+                  { favorite.value }
                 </List.Content>
               </List.Item>
             )
