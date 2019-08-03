@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { removeItem } from '../../actions/index';
 import { connect } from 'react-redux';
 import { List, Button, Icon, Image } from 'semantic-ui-react';
 import './All.css';
@@ -9,24 +10,31 @@ const mapStateToProps = (state) => {
   }
 }
 
+const mapDispatchToProps = (dispatch) => {
+  return {
+    removeItem: (payload) => dispatch(removeItem(payload))
+  }
+}
+
 class All extends Component {
   render() {
       return (
         <List verticalAlign='middle'>
         {
+          // Payload: { value: 'Hi', favorite: false, id: 'abc123' }
           this.props.items.map(item => {
             return (
-              <List.Item>
+              <List.Item key={item.id}>
                 <List.Content floated='right'>
-                  <Button negative onClick={() => {}}>Remove</Button>
+                  <Button negative onClick={() => this.props.removeItem(item.id)}>Remove</Button>
                 </List.Content>
                 <List.Content floated='left'>
                   <Button basic icon onClick={() => {}}>
-                    <Icon name="star outline" />
+                    <Icon color={item.favorite ? 'yellow': 'grey'} name="star outline" />
                   </Button>
                 </List.Content>
                 <List.Content>
-                  // Content goes here
+                  { item.value }
                 </List.Content>
               </List.Item>
             )
@@ -37,4 +45,4 @@ class All extends Component {
   }
 }
 
-export default connect(mapStateToProps)(All);
+export default connect(mapStateToProps, mapDispatchToProps)(All);
